@@ -1,0 +1,30 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight, Check, Clock, MapPin, UsersThree, X } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
+import type { Tour } from "@/data/tours";
+import { ContactForm } from "./ContactForm";
+
+export function TourExperience({ tour }: { tour: Tour }) {
+  const [image,setImage] = useState<number|null>(null);
+  const [booking,setBooking] = useState(false);
+  useEffect(()=>{ document.body.style.overflow = image!==null||booking ? "hidden" : ""; return()=>{document.body.style.overflow=""}},[image,booking]);
+  useEffect(()=>{function key(e:KeyboardEvent){if(e.key==="Escape"){setImage(null);setBooking(false)} if(image!==null&&e.key==="ArrowRight")setImage((image+1)%tour.gallery.length);if(image!==null&&e.key==="ArrowLeft")setImage((image-1+tour.gallery.length)%tour.gallery.length)}window.addEventListener("keydown",key);return()=>window.removeEventListener("keydown",key)},[image,tour.gallery.length]);
+  return <>
+    <nav className="tour-subnav"><div className="shell"><div><a href="#poveste">Poveste</a><a href="#galerie">Galerie</a><a href="#traseu">Traseu</a><a href="#inclus">Inclus</a></div><button className="button button-small button-solid" onClick={()=>setBooking(true)}>Solicită rezervare</button></div></nav>
+    <section className="tour-hero">
+      <div className="tour-hero-image"><Image src={tour.hero} alt={tour.title} fill priority sizes="100vw" /></div>
+      <div className="shell tour-hero-content"><div className="breadcrumbs"><Link href="/expeditii">Expediții</Link><span>/</span><span>{tour.shortTitle}</span></div><span className="kicker light">{tour.category} · {tour.location}</span><h1>{tour.title}</h1><p>{tour.summary}</p><button className="button button-solid" onClick={()=>setBooking(true)}>Rezervă această expediție <ArrowRight /></button></div>
+      <div className="shell tour-facts"><div><Clock /><span>Durată<strong>{tour.duration}</strong></span></div><div><UsersThree /><span>Grup<strong>{tour.group}</strong></span></div><div><MapPin /><span>Punct de pornire<strong>Chișinău</strong></span></div><div><span>Preț de la</span><strong className="fact-price">€{tour.price}</strong><small>/ grup</small></div></div>
+    </section>
+    <section className="section" id="poveste"><div className="shell tour-story"><div><span className="kicker">De ce această rută</span><h2>Nu este doar un tur.</h2></div><div><p className="lead-copy">{tour.description}</p><p>Înainte de plecare discutăm cu tine despre interese, ritm și orice nevoie specială. Itinerarul de mai jos este punctul de pornire — experiența finală rămâne personală.</p></div></div><div className="shell highlight-grid">{tour.highlights.map((h,i)=><article key={h.title}><span>0{i+1}</span><h3>{h.title}</h3><p>{h.text}</p></article>)}</div></section>
+    <section className="section gallery-section" id="galerie"><div className="shell"><span className="kicker">Jurnal vizual</span><div className="section-heading"><h2>Privește mai aproape.</h2><p>Apasă pe orice fotografie pentru galeria completă.</p></div><div className="gallery-grid">{tour.gallery.map((src,i)=><button key={src} onClick={()=>setImage(i)} aria-label={`Deschide fotografia ${i+1}`}><Image src={src} alt={`${tour.title}, fotografia ${i+1}`} fill sizes="(max-width:650px) 100vw,50vw" /><span>0{i+1}</span></button>)}</div></div></section>
+    <section className="section route-section" id="traseu"><div className="shell route-layout"><div className="route-intro"><span className="kicker light">Plan orientativ</span><h2>Firul călătoriei.</h2><p>Orele sunt orientative. Păstrăm suficient spațiu între opriri pentru ca drumul să nu devină o listă de bifat.</p></div><div className="timeline">{tour.route.map((stop,i)=><article key={stop.title}><div className="timeline-time">{stop.time}</div><div><span>Oprirea {i+1}</span><h3>{stop.title}</h3><p>{stop.text}</p></div></article>)}</div></div></section>
+    <section className="section" id="inclus"><div className="shell included-layout"><div><span className="kicker">Fără litere mici</span><h2>Ce intră în preț.</h2><p>Confirmăm toate detaliile și costul final înainte să rezervi. Pentru grupuri mai mari, pregătim o ofertă separată.</p></div><div className="included-box"><h3>Inclus</h3>{tour.included.map(item=><p key={item}><Check weight="bold" />{item}</p>)}</div><div className="included-box muted-box"><h3>Neinclus</h3>{tour.notIncluded.map(item=><p key={item}><X />{item}</p>)}</div></div></section>
+    <section className="booking-cta"><div className="shell"><span className="kicker light">Următorul pas</span><h2>Ți-ar plăcea să fii aici?</h2><p>Trimite-ne perioada și numărul de persoane. Revenim cu disponibilitatea și toate detaliile.</p><button className="button button-light" onClick={()=>setBooking(true)}>Verifică disponibilitatea <ArrowRight /></button></div></section>
+    {image!==null&&<div className="lightbox" role="dialog" aria-modal="true"><button className="lightbox-close" onClick={()=>setImage(null)} aria-label="Închide galeria"><X /></button><button className="lightbox-prev" onClick={()=>setImage((image-1+tour.gallery.length)%tour.gallery.length)} aria-label="Imaginea precedentă"><ArrowLeft /></button><div className="lightbox-image"><Image src={tour.gallery[image]} alt={`${tour.title}, imagine mărită`} fill sizes="95vw" /></div><button className="lightbox-next" onClick={()=>setImage((image+1)%tour.gallery.length)} aria-label="Imaginea următoare"><ArrowRight /></button><span className="lightbox-count">{image+1} / {tour.gallery.length}</span></div>}
+    {booking&&<div className="modal-backdrop" role="dialog" aria-modal="true"><div className="booking-modal"><button className="modal-close" onClick={()=>setBooking(false)} aria-label="Închide"><X /></button><span className="kicker">Cerere de rezervare</span><h2>{tour.shortTitle}</h2><p>Nu plătești nimic acum. Verificăm disponibilitatea și te contactăm în maximum o zi lucrătoare.</p><ContactForm compact tourTitle={tour.title} /></div></div>}
+  </>;
+}

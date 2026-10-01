@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound(){return <section className="page-hero" style={{minHeight:"70vh",display:"grid",alignItems:"center"}}><div className="narrow"><span className="kicker">Eroare 404</span><h1>Ruta aceasta nu există.</h1><p>Poate a fost mutată sau ai ajuns pe un drum secundar. Întoarce-te la catalogul expedițiilor.</p><Link className="button button-solid" href="/expeditii">Vezi expedițiile</Link></div></section>}
