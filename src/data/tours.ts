@@ -13,6 +13,7 @@ export type Tour = {
   hero: string;
   gallery: string[];
   highlights: { title: string; text: string }[];
+  itinerary?: { label: string; title: string; image: string; activities: string[] }[];
   route: { time: string; title: string; text: string }[];
   included: string[];
   notIncluded: string[];
@@ -174,6 +175,10 @@ export const tours: Tour[] = [
       { time: "Seara", title: "Cină și povești", text: "Meniu de sezon, vin de casă și timp fără program rigid." },
       { time: "Ziua 2", title: "Drumul vinului", text: "Vizită la o cramă, degustare și opriri foto pe traseu." },
       { time: "18:00", title: "Înapoi în Chișinău", text: "Sosire estimată în centru sau transfer direct la hotel." },
+    ],
+    itinerary: [
+      { label: "Ziua 1", title: "Chișinău → Orhei", image: images.village, activities: ["Plecare din Chișinău și opriri de arhitectură", "Drumuri secundare și sate", "Prânz local și opriri pentru fotografii", "Sosire la pensiune", "Cină de sezon și povești cu gazdele", "Noapte la pensiune"] },
+      { label: "Ziua 2", title: "Drumul vinului", image: images.wine, activities: ["Mic dejun la pensiune", "Vizită la o cramă și degustare", "Opriri pentru fotografii pe traseu", "Întoarcere în Chișinău în jurul orei 18:00", "Sosire în centru sau transfer la hotel"] },
     ],
     included: ["Transport pe tot traseul", "Ghid însoțitor", "O noapte la pensiune", "Mic dejun și o degustare"],
     notIncluded: ["Prânzurile și cina", "Supliment cameră single", "Asigurare de călătorie"],

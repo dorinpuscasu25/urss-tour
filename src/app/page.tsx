@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { TourCard } from "@/components/TourCard";
+import { Reviews } from "@/components/Reviews";
+import { BookingSection } from "@/components/BookingSection";
 import { tours } from "@/data/tours";
 
 const journal = [
@@ -46,13 +48,12 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="story-section">
-      <div className="story-image"><Image src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1300&q=85" alt="Drum prin peisajul rural" fill sizes="(max-width:900px) 100vw,50vw" /></div>
-      <div className="story-content"><span className="kicker">Din jurnalul de drum</span><blockquote>„Am venit pentru mașină. Am plecat înțelegând un oraș întreg.”</blockquote><p>Turul nu s-a simțit ca o lecție, ci ca o după-amiază cu un prieten care știe fiecare colț. Cele trei ore au trecut fără să le simțim.</p><div className="story-author">Marc & Alice · Lyon, Franța</div><Link className="text-link" href="/travel/chisinau-masina-retro">Vezi ruta lor <ArrowUpRight /></Link></div>
-    </section>
+    <Reviews />
 
     <section className="section" id="jurnal">
       <div className="shell"><span className="kicker">Note de teren</span><div className="section-heading"><h2>Locuri, oameni, context.</h2><p>Fragmente din drum și idei pentru călătoria ta.</p></div><div className="journal-grid">{journal.map(item=><article className="journal-card" key={item.title}><div className="journal-img"><Image src={item.image} alt="" fill sizes="(max-width:900px) 100vw,40vw" /></div><small>{item.tag}</small><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div>
     </section>
+    <section className="section home-about"><div className="shell home-about-layout"><div><span className="kicker">Povestea noastră</span><h2>De la o pasiune pentru arhive, la expediții tematice</h2><p>Am pornit ca un grup mic de pasionați de istorie est-europeană care voiau să vadă cu ochii lor locurile despre care citeau în arhive. Astăzi organizăm expediții documentate istoric prin fostul spațiu sovietic, pentru oameni curioși, nu pentru turiști grăbiți.</p><Link className="button" href="#rezervare">Programează o discuție <ArrowRight /></Link></div><div className="home-about-note"><span className="kicker">Din 2018</span><p>Cercetare înainte de plecare.<br />Oameni locali alături.<br />Timp pentru întrebări.</p><Link className="text-link" href="/despre">Cunoaște echipa <ArrowUpRight /></Link></div></div></section>
+    <BookingSection />
   </>;
 }

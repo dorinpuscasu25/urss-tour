@@ -15,7 +15,7 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
         <div className="tour-meta"><span><MapPin /> {tour.location}</span><span><Clock /> {tour.duration}</span><span><UsersThree /> {tour.group}</span></div>
         <h3><Link href={`/travel/${tour.slug}`}>{tour.title}</Link></h3>
         <p>{tour.summary}</p>
-        <div className="tour-card-foot"><span>de la <strong>€{tour.price}</strong> <small>/ grup</small></span><Link className="circle-link" href={`/travel/${tour.slug}`} aria-label={`Vezi ${tour.title}`}><ArrowUpRight /></Link></div>
+        <div className="tour-card-foot"><span>de la <strong>€{tour.price}</strong> <small>/ grup</small></span><Link className="button button-small" href={`/travel/${tour.slug}`} aria-label={`Rezervă experiența: ${tour.title}`}>Rezervă experiența <ArrowUpRight /></Link></div>
       </div>
     </article>
   );

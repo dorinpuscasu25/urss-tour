@@ -344,3 +344,67 @@ h3 { font-size:clamp(1.5rem,2.5vw,2.1rem); font-weight:600; }
   .footer-main>div:last-child { grid-column:auto; }
   .footer-bottom { flex-direction:column; gap:8px; }
 }
+
+/* Feedback: open booking forms and navigable editorial sections */
+html { scroll-padding-top:150px; }
+.carousel-track { display:flex; overflow-x:auto; gap:24px; scroll-snap-type:x mandatory; scrollbar-width:thin; }
+.carousel-slide { flex:0 0 100%; min-width:0; scroll-snap-align:start; scroll-snap-stop:always; }
+.carousel-controls { display:flex; justify-content:flex-end; align-items:center; gap:20px; margin-top:24px; font:.75rem var(--font-ibm-mono); }
+.carousel-controls button { width:46px; height:46px; display:grid; place-items:center; border:1px solid var(--line); background:transparent; cursor:pointer; }
+.carousel-controls button:hover:not(:disabled) { background:var(--ink); color:var(--paper); }
+.carousel-controls button:disabled { opacity:.3; cursor:default; }
+.gallery-section,.route-section { background:var(--paper); color:var(--ink); }
+.gallery-photo { display:block; position:relative; width:100%; height:560px; padding:0; border:0; cursor:zoom-in; background:var(--paper-dark); }
+.gallery-photo img { object-fit:cover; }
+.gallery-photo span { position:absolute; bottom:20px; left:20px; background:var(--paper); padding:8px 12px; font-family:var(--font-ibm-mono); }
+.itinerary-card { display:grid; grid-template-columns:1fr 1fr; background:#fffdf8; border:1px solid var(--line); }
+.itinerary-image { position:relative; min-height:420px; }
+.itinerary-image img { object-fit:cover; }
+.itinerary-body { padding:40px; }
+.itinerary-body h3 { font-size:2.5rem; }
+.itinerary-body ul { padding-left:20px; color:var(--muted); }
+.itinerary-body li { padding:7px 0; }
+.review-card { background:#fffdf8; padding:44px; border:1px solid var(--line); }
+.review-card blockquote { max-width:900px; margin:24px 0; font:500 clamp(2rem,4vw,3.5rem)/1.1 var(--font-barlow-condensed); text-transform:uppercase; }
+.review-card>p { max-width:800px; color:var(--muted); }
+.review-experience { font:.73rem var(--font-ibm-mono); text-transform:uppercase; color:var(--red); }
+.review-author { display:flex; gap:16px; flex-wrap:wrap; margin-top:28px; border-top:1px solid var(--line); padding-top:20px; }
+.review-author span { color:var(--muted); }
+.home-about-layout { display:grid; grid-template-columns:1.4fr .6fr; gap:90px; align-items:center; }
+.home-about h2 { font-size:clamp(2.7rem,5vw,4.5rem); }
+.home-about p { color:var(--muted); max-width:720px; }
+.home-about-note { padding:35px; border:1px solid var(--line); }
+.booking-section { background:var(--ink); color:var(--paper); }
+.booking-layout { display:grid; grid-template-columns:.9fr 1.1fr; gap:80px; align-items:start; }
+.booking-layout>div>p { color:rgba(255,255,255,.7); }
+.booking-section .contact-form { color:var(--paper); background:transparent; border-color:rgba(255,255,255,.25); box-shadow:none; }
+.booking-section input,.booking-section select,.booking-section textarea { color:var(--paper); border-color:rgba(255,255,255,.35); }
+.booking-section select option { background:var(--ink); }
+.booking-section .checkbox span,.booking-section .form-note { color:rgba(255,255,255,.65); }
+.form-note { font-size:.8rem; color:var(--muted); }
+.thank-you { min-height:65vh; }
+.thank-you h1 { font-size:clamp(3rem,7vw,6rem); }
+:focus-visible { outline:2px solid #d85664; outline-offset:4px; }
+@media(max-width:900px) {
+  .home-about-layout,.booking-layout { grid-template-columns:1fr; gap:40px; }
+}
+@media(max-width:650px) {
+  .home-hero { min-height:calc(100svh - 78px); align-items:center; }
+  .home-hero-content { padding:64px 0 80px; }
+  .home-hero h1 { font-size:clamp(2.8rem,11vw,3.8rem); }
+  .hero-actions { flex-wrap:nowrap; gap:8px; }
+  .home-hero .hero-actions .button { padding:0 9px; font-size:clamp(.5rem,2.1vw,.68rem); letter-spacing:0; gap:6px; }
+  .hero-actions svg { flex-shrink:0; }
+  .tour-card-foot { gap:10px; flex-wrap:wrap; }
+  .tour-card-foot .button { font-size:.62rem; padding:0 12px; }
+  .gallery-photo { height:330px; }
+  .itinerary-card { grid-template-columns:1fr; }
+  .itinerary-image { min-height:250px; }
+  .itinerary-body,.review-card { padding:25px; }
+  .booking-section .contact-form { padding:24px 18px; }
+  .booking-section .button { width:100%; padding:12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { transition:none!important; }
+}
