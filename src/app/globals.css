@@ -228,7 +228,7 @@ h3 { font-size:clamp(1.5rem,2.5vw,2.1rem); font-weight:600; }
 }
 @media(max-width:650px) {
   .tour-subnav { top:78px; }
-  .tour-hero h1 { font-size:3.9rem; }
+  .tour-hero h1 { font-size:clamp(2.8rem,13vw,3.9rem); overflow-wrap:break-word; }
   .tour-facts { width:100%; padding:0 16px; }
   .tour-facts>div { padding:12px; }
   .highlight-grid { grid-template-columns:1fr; margin-top:50px; }
@@ -389,11 +389,11 @@ html { scroll-padding-top:150px; }
   .home-about-layout,.booking-layout { grid-template-columns:1fr; gap:40px; }
 }
 @media(max-width:650px) {
-  .home-hero { min-height:calc(100svh - 78px); align-items:center; }
-  .home-hero-content { padding:64px 0 80px; }
+  .home-hero { min-height:calc(100svh - 78px); align-items:flex-start; }
+  .home-hero-content { padding:64px 0 64px; }
   .home-hero h1 { font-size:clamp(2.8rem,11vw,3.8rem); }
   .hero-actions { flex-wrap:nowrap; gap:8px; }
-  .home-hero .hero-actions .button { padding:0 9px; font-size:clamp(.5rem,2.1vw,.68rem); letter-spacing:0; gap:6px; }
+  .home-hero .hero-actions .button { padding:0 9px; font-size:10px; letter-spacing:0; gap:6px; }
   .hero-actions svg { flex-shrink:0; }
   .tour-card-foot { gap:10px; flex-wrap:wrap; }
   .tour-card-foot .button { font-size:.62rem; padding:0 12px; }
@@ -407,4 +407,15 @@ html { scroll-padding-top:150px; }
 @media(prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
   *,*::before,*::after { transition:none!important; }
+}
+
+@media(max-width:650px) {
+  .contact-form input,.contact-form textarea,.contact-form select { font-size:16px; }
+  .booking-layout,.home-about-layout { min-width:0; }
+}
+@media(max-width:650px) {
+  .tour-facts { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .tour-facts>div { min-width:0; gap:8px; padding:12px 8px; flex-wrap:wrap; }
+  .tour-facts>div>span { min-width:0; }
+  .tour-facts strong { font-size:.9rem; overflow-wrap:anywhere; }
 }

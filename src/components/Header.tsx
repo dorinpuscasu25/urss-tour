@@ -34,8 +34,8 @@ export function Header() {
       </div>
       {open && (
         <div className="mobile-menu">
-          {links.map(([label, href], index) => <Link href={href} key={href}><span>0{index + 1}</span>{label}</Link>)}
-          <Link className="button" href="/contact">Planifică o călătorie <ArrowUpRight /></Link>
+          {links.map(([label, href], index) => <Link href={href} key={href} onClick={() => setOpen(false)}><span>0{index + 1}</span>{label}</Link>)}
+          <Link className="button" href="/contact" onClick={() => setOpen(false)}>Planifică o călătorie <ArrowUpRight /></Link>
         </div>
       )}
     </header>
